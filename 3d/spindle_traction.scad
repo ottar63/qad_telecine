@@ -4,7 +4,7 @@ translate([30,0,0])
 spindle_top();
 module spindle_traction() {
         difference () {
-            cylinder(d=20,h=12);
+            cylinder(d=24,h=12);
             cylinder(d=5,h=12);
         }
         translate([0,0,12])
@@ -18,7 +18,7 @@ module spindle_traction() {
        
 }
 module spindle_top() {
-    cylinder(d=20,h=4);
+    cylinder(d=24,h=4);
     translate([-2,-2,2])
     cube([4,4,7]);
 }
