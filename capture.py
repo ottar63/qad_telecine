@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import argparse
 import glob
 import ntpath
@@ -8,10 +9,6 @@ import cv2
 import util
 from variables import *
 
-# steps afte frame capture
-frame_step = 260
-# steps for finding next sprock
-search_step = 20
 
 
 def capture(nr, jobname):
