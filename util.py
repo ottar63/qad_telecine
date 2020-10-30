@@ -85,7 +85,7 @@ class Camera:
         global sprock_x_max
         global sprock_w
         global sprock_h
-        SX_center = 0
+        SX_left = 0
         SY_center = 0
         SP_found = False
         crop_image = 0
