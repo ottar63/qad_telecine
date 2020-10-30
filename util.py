@@ -108,15 +108,15 @@ class Camera:
         for c in cnts:
             x, y, w, h = cv2.boundingRect(c)
             if w >= sprock_w and h >= sprock_h:
-                print("Possible sprock at {} {}".format(x, y))
+                print("Possible sprock center at  {}".format(y + (h/2)))
             if w >= sprock_w and h >= sprock_h and 600 < y < 1800:
                 SY_center = int(y + (h / 2))
-                SX_center = int(x + (w / 2)) + sprock_x_min
+                SX_left = x  + sprock_x_min
                 SP_found = True
                 print("y: {}".format(SY_center))
 
         # if found , return 1,center of sprock and image
-        return SP_found, SY_center, SX_center, image
+        return SP_found, SY_center, SX_left, image
 
     def capture_image(self):
         global sprock_exposure
@@ -128,14 +128,14 @@ class Camera:
         image = rawcapture.array
         return image
 
-    def crop_image(self, sy_center, sx_center, image):
+    def crop_image(self, sy_center, sx_left, image):
         global capture_exposure
         global capture_iso
         global sprock_x_max
         global crop_w
         global crop_h
         image = image[sy_center - int(crop_h / 2):sy_center + int(crop_h / 2),
-                sx_center + crop_x_offset:sx_center + crop_x_offset + crop_w]
+                sx_left + crop_x_offset:sx_left + crop_x_offset + crop_w]
         cv2.namedWindow('Cimage', cv2.WINDOW_NORMAL)
         cv2.imshow("Cimage", image)
         cv2.waitKey(10)

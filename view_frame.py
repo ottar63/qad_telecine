@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 import numpy as np
@@ -47,23 +48,23 @@ for c in cnts:
     # cv2.drawContours(image, [c], -1, (255, 0, 0), 2, offset=(sprock_x_min, 0))
     if w >= sprock_w and h >= sprock_h:
         # this contour is a sprock
-        SX_center = int(x + (w/2)) + sprock_x_min
+        SX_left = x  + sprock_x_min
         SY_center = int(y + (h/2))
         print("Sprocket OK center  at : {} {} w:{} h:{}".
-              format(SX_center, SY_center, w, h))
+              format(SX_left, SY_center, w, h))
         # draw crosshair at sprock center
         if sprock_y_min_OK <= SY_center <= sprock_y_max_OK:
             # sprock center is within limits
             cv2.drawContours(image, [c], -1, green, 6, offset=(sprock_x_min, 0))
             # draw lines around crop area
-            Xmin = SX_center + crop_x_offset
-            Xmax = SX_center + crop_w + crop_x_offset
+            Xmin = SX_left + crop_x_offset
+            Xmax = SX_left + crop_w + crop_x_offset
             Ymin = int(SY_center - (crop_h / 2))
             Ymax = int(SY_center + (crop_h / 2))
             cv2.rectangle(image, (Xmin, Ymin), (Xmax, Ymax), green, 4)
         else:
             cv2.drawContours(image, [c], -1, yellow, 6, offset=(sprock_x_min, 0))
-        image = cross_hair(image, SX_center, SY_center, 10, 3)
+        image = cross_hair(image, SX_left, SY_center, 10, 3)
 
         # crop_img = image[Ymin:Ymax, Xmin:Xmax]
         # cv2.imwrite(outfile_name, crop_img)
